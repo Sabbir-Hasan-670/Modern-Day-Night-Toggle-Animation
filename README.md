@@ -47,4 +47,4 @@ Follow these quick steps to pull down the repository and preview the builds:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git)
+   git clone [https://github.com/Sabbir-Hasan-670/Modern-Day-Night-Toggle-Animation](https://github.com/Sabbir-Hasan-670/Modern-Day-Night-Toggle-Animation)
