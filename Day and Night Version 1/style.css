@@ -1,0 +1,136 @@
+/* ── CSS Custom Properties ── */
+:root {
+  --bg:          #f0f4ff;
+  --surface:     #ffffff;
+  --text:        #1a1a2e;
+  --subtext:     #555577;
+  --track-day:   #f9c74f;
+  --track-night: #1e1b4b;
+  --thumb-day:   #ffffff;
+  --thumb-night: #c7d2fe;
+  --shadow:      rgba(0, 0, 0, 0.12);
+  --transition:  0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg:      #0f0e17;
+  --surface: #1a1a2e;
+  --text:    #e8e8f0;
+  --subtext: #9999bb;
+  --shadow:  rgba(0, 0, 0, 0.5);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* ── Card Container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 48px 56px;
+  background: var(--surface);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px var(--shadow);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+/* ── Greeting Heading ── */
+.greeting {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  transition: color var(--transition);
+}
+
+/* ── Toggle Track ── */
+.toggle {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  width: 110px;
+  height: 54px;
+  border-radius: 999px;
+  background: var(--track-day);
+  padding: 4px;
+  position: relative;
+  transition: background var(--transition);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Night track colour when checked */
+.toggle input:checked ~ .slider {
+  background: var(--track-night);
+}
+
+/* ── Icons ── */
+.icon {
+  position: absolute;
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.sun  { left: 10px;  opacity: 1; transform: scale(1); }
+.moon { right: 10px; opacity: 0; transform: scale(0.6); }
+
+.toggle input:checked ~ .slider .sun  { opacity: 0; transform: scale(0.6); }
+.toggle input:checked ~ .slider .moon { opacity: 1; transform: scale(1); }
+
+/* ── Thumb ── */
+.thumb {
+  position: absolute;
+  left: 4px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--thumb-day);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: transform var(--transition), background var(--transition);
+}
+
+.toggle input:checked ~ .slider .thumb {
+  transform: translateX(56px);
+  background: var(--thumb-night);
+}
+
+/* ── Focus ring for accessibility ── */
+.toggle input:focus-visible ~ .slider {
+  outline: 3px solid #6366f1;
+  outline-offset: 3px;
+}
+
+/* ── Sub-label ── */
+.label-text {
+  font-size: 0.9rem;
+  color: var(--subtext);
+  transition: color var(--transition);
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Day / Night Toggle</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Stars layer -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Clouds layer -->
+  <div class="clouds" id="clouds"></div>
+
+  <p class="label" id="label">Day Mode</p>
+
+  <div class="toggle-wrap" id="toggle" role="switch" aria-checked="false" tabindex="0" aria-label="Toggle day/night mode">
+    <div class="track">
+      <div class="thumb">
+        <!-- Sun rays -->
+        <div class="rays" id="rays"></div>
+        <!-- Moon craters -->
+        <div class="craters" id="craters"></div>
+        <!-- Moon shadow for crescent -->
+        <div class="moon-shadow"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="hint">Click to toggle ✦</p>
+
+  <script src="script.js"></script>
+</body>
+</html>

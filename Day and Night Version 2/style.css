@@ -1,0 +1,240 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --day-bg-top:    #87CEEB;
+  --day-bg-bottom: #FDB97D;
+  --night-bg-top:    #0f0c29;
+  --night-bg-bottom: #302b63;
+  --transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(160deg, var(--day-bg-top), var(--day-bg-bottom));
+  transition: background var(--transition);
+  overflow: hidden;
+  position: relative;
+}
+
+body.night {
+  background: linear-gradient(160deg, var(--night-bg-top), var(--night-bg-bottom));
+}
+
+/* ── Stars ── */
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+body.night .stars { opacity: 1; }
+
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.2; transform: scale(1); }
+  to   { opacity: 1;   transform: scale(1.4); }
+}
+
+/* ── Clouds ── */
+.clouds {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity var(--transition);
+}
+body.night .clouds { opacity: 0; }
+
+.cloud {
+  position: absolute;
+  background: rgba(255,255,255,0.85);
+  border-radius: 50px;
+  animation: drift linear infinite;
+}
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+@keyframes drift {
+  from { transform: translateX(-200px); }
+  to   { transform: translateX(110vw);  }
+}
+
+/* ── Label ── */
+.label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  margin-bottom: 2rem;
+  transition: color var(--transition);
+  user-select: none;
+}
+
+/* ── Toggle Track ── */
+.toggle-wrap {
+  position: relative;
+  width: 140px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.track {
+  width: 100%;
+  height: 100%;
+  border-radius: 35px;
+  background: linear-gradient(135deg, #f9d423, #ff4e50);
+  box-shadow:
+    0 0 0 4px rgba(255,255,255,0.3),
+    0 8px 32px rgba(0,0,0,0.25),
+    inset 0 2px 6px rgba(0,0,0,0.15);
+  transition:
+    background var(--transition),
+    box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+body.night .track {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  box-shadow:
+    0 0 0 4px rgba(255,255,255,0.12),
+    0 8px 32px rgba(0,0,0,0.5),
+    inset 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* inner glow sweep */
+.track::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+.toggle-wrap:hover .track::after {
+  transform: translateX(100%);
+}
+
+/* ── Thumb ── */
+.thumb {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff9c4, #FFD700 60%, #FFA500);
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.5),
+    0 4px 16px rgba(255,165,0,0.6),
+    0 0 30px rgba(255,200,0,0.4);
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    box-shadow var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+body.night .thumb {
+  transform: translateX(70px);
+  background: radial-gradient(circle at 35% 35%, #e8e8e8, #c0c0c0 60%, #a0a0a0);
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.2),
+    0 4px 16px rgba(0,0,0,0.5),
+    0 0 20px rgba(200,200,255,0.3);
+}
+
+/* ── Sun rays ── */
+.rays {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: spin 8s linear infinite;
+  transition: opacity var(--transition);
+}
+body.night .rays { opacity: 0; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.ray {
+  position: absolute;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #FFD700, transparent);
+  left: 50%;
+  transform-origin: bottom center;
+  top: -14px;
+  margin-left: -2px;
+}
+
+/* ── Moon craters ── */
+.craters {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+body.night .craters { opacity: 1; }
+
+.crater {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* ── Moon shadow (crescent effect) ── */
+.moon-shadow {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #1a1a2e, #16213e);
+  top: -4px;
+  left: -8px;
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+body.night .moon-shadow { opacity: 1; }
+
+/* ── Hint text ── */
+.hint {
+  margin-top: 2rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.06em;
+  transition: color var(--transition);
+}

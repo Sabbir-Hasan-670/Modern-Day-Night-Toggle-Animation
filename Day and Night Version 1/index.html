@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Day / Night Toggle</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="greeting">Good Day! ☀️</h1>
+
+    <label class="toggle" aria-label="Toggle day/night mode">
+      <input type="checkbox" id="themeToggle" />
+      <span class="slider">
+        <span class="icon sun">☀️</span>
+        <span class="icon moon">🌙</span>
+        <span class="thumb"></span>
+      </span>
+    </label>
+
+    <p class="label-text">Click to switch mode</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
